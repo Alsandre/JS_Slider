@@ -1,0 +1,41 @@
+.vertical-slider {
+    border: 1px solid red;
+    width: 80%;
+    height: 300px;
+    margin: 25px auto;
+    position: relative;
+}
+.vertical-previous {
+    border: 1px solid red;
+    background-color: #faf7b7;
+    width: 90%;
+    /* height: 70%; */
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    /* transform: skew(-15deg); */
+    /* translate: -50% -50%; */
+}
+.vertical-active {
+    border: 1px solid red;
+    background-color: #ccc;
+    width: 60%;
+    height: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 50;
+}
+.vertical-next {
+    border: 1px solid red;
+    background-color: #f3bebe;
+    width: 90%;
+    height: 70%;
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    transform: translateZ(50px);
+    transform-style: preserve-3d;
+    /* translate: -50% -50%; */
+}

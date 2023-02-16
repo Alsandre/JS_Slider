@@ -12,30 +12,18 @@ let framesArr = [
   $("last-right"),
 ];
 
-let workingArr = [
-  "img1",
-  "img2",
-  "img3",
-  "img4",
-  "img5",
-  "img6",
-  "img7",
-  "img8",
-];
+let workingArr = [];
 
 let btnRight = document.getElementById("rightBtn");
 let btnLeft = document.getElementById("leftBtn");
 
-
-onload = (event) => {
-  framesArr.forEach((el, ind) => {
-    el.innerText = workingArr[ind];
-  });
-};
-
+// onload = (event) => {
+//   framesArr.forEach((el, ind) => {
+//     el.innerText = workingArr[ind];
+//   });
+// };
 
 btnRight.addEventListener("click", () => {
-    
   sliderFunc(workingArr, framesArr, "RIGHT");
   //   if (framesArr[2].innerText === "this is last") {
   //     rightClickCounter = -2;
@@ -69,19 +57,31 @@ btnLeft.addEventListener("click", () => {
   // leftClickCounter++;
 });
 
-// fetch('https://reqres.in/api/users?page=2')
-// .then(res => res.json())
-// .then(dataLoad => {
-//     dataLoad.data.forEach(element => {
-//         let imgContainer = document.createElement('div');
-//         let img = document.createElement('img');
-//         img.src = element.avatar;
-//         imgContainer.appendChild(img)
-//         imgContainer.classList.add('img-container')
-//         slider.appendChild(imgContainer)
-//     });
-// })
-
+fetch("https://reqres.in/api/users?page=2")
+  .then((res) => res.json())
+  .then((dataLoad) => {
+    dataLoad.data.forEach((element) => {
+      // let imgContainer = document.createElement('div');
+      // let img = document.createElement('img');
+      // img.src = element.avatar;
+      // imgContainer.appendChild(img)
+      // imgContainer.classList.add('img-container')
+      // slider.appendChild(imgContainer)
+      // console.log(element.avatar);
+      let img = document.createElement("img");
+      img.src = element.avatar;
+      img.id = element.email;
+      let item = {id: element.email, img}
+      // console.log(element)
+      workingArr.push(item);
+    });
+    framesArr.forEach((el, ind) => {
+      // let img = document.createElement('img')
+      // img.src = workingArr[ind];
+      // console.log(el)
+      el.appendChild(workingArr[ind].img);
+    });
+  });
 // function sliderFunc(sourceArray, framesArray, direction) {
 //   let lastLeft = document.getElementById("last-left");
 //   let secondaryLeft = document.getElementById("secondary-left");

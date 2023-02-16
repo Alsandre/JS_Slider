@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script defer type="module" src="index.js"></script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="slider-v02.css">
     <title>Document</title>
   </head>
   <body>
     <div class="slider-container" id="slider">
       <div class="general" id="last-left"></div>
       <div class="general" id="secondary-left"></div>
-      <div class="general" id="active-slide">ceneter</div>
+      <div class="general" id="active-slide"></div>
       <div class="general" id="secondary-right"></div>
       <div class="general" id="last-right"></div>
     </div>
@@ -85,6 +86,12 @@
           />
         </svg>
       </button>
+    </div>
+
+    <div id="slider-v02" class="vertical-slider">
+      <div id="v02-previous" class="vertical-previous"></div>
+      <div id="v02-active" class="vertical-active"></div>
+      <div id="v02-next" class="vertical-next"></div>
     </div>
   </body>
 </html>

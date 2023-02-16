@@ -1,72 +1,104 @@
 export const sliderFunc = (sourceArray, framesArray, direction) => {
-    let lastLeft = document.getElementById("last-left");
-    let secondaryLeft = document.getElementById("secondary-left");
-    let activeSlide = document.getElementById("active-slide");
-    let secondaryRight = document.getElementById("secondary-right");
-    let lastRight = document.getElementById("last-right");
-  
-    let indexOfLastLeft = sourceArray.indexOf(lastLeft.innerText);
-    let indexOfLastRight = sourceArray.indexOf(lastRight.innerText);
-    console.log(indexOfLastLeft);
-    if (direction === "LEFT") {
-      if (
-        sourceArray[indexOfLastLeft - 1] !== undefined &&
-        lastLeft.innerText !== "this is empty"
-      ) {
-        lastRight.innerText = secondaryRight.innerText;
-        secondaryRight.innerText = activeSlide.innerText;
-        activeSlide.innerText = secondaryLeft.innerText;
-        secondaryLeft.innerText = lastLeft.innerText;
-        lastLeft.innerText = sourceArray[indexOfLastLeft - 1];
-      } else if (
-        sourceArray[indexOfLastLeft - 1] === undefined &&
-        lastLeft.innerText !== "this is empty"
-      ) {
-        lastRight.innerText = secondaryRight.innerText;
-        secondaryRight.innerText = activeSlide.innerText;
-        activeSlide.innerText = secondaryLeft.innerText;
-        secondaryLeft.innerText = lastLeft.innerText;
-        lastLeft.innerText = "this is empty";
-      } else if (secondaryLeft.innerText !== "this is empty") {
-        lastRight.innerText = secondaryRight.innerText;
-        secondaryRight.innerText = activeSlide.innerText;
-        activeSlide.innerText = secondaryLeft.innerText;
-        secondaryLeft.innerText = "this is empty";
-        lastLeft.innerText = "this is empty";
-      } else if (activeSlide.innerText !== "this is empty") {
-        lastRight.innerText = "this is empty";
-        secondaryRight.innerText = "this is empty";
-        activeSlide.innerText = sourceArray[sourceArray.length - 1];
-        secondaryLeft.innerText = sourceArray[sourceArray.length - 2];
-        lastLeft.innerText = sourceArray[sourceArray.length - 3];
-      }
+  let lastLeft = document.getElementById("last-left");
+  let secondaryLeft = document.getElementById("secondary-left");
+  let activeSlide = document.getElementById("active-slide");
+  let secondaryRight = document.getElementById("secondary-right");
+  let lastRight = document.getElementById("last-right");
+
+  let indexOfLastLeft;
+  sourceArray.forEach((el, ind) => {
+    if (lastLeft.childNodes[0] && lastLeft.childNodes[0].id == el.id) {
+      indexOfLastLeft = ind;
     }
-    if (direction === "RIGHT") {
-      if (sourceArray[indexOfLastRight + 1] !== undefined && lastRight.innerText !== "this is empty") {
-          lastLeft.innerText = secondaryLeft.innerText;
-          secondaryLeft.innerText = activeSlide.innerText;
-          activeSlide.innerText = secondaryRight.innerText;
-          secondaryRight.innerText = lastRight.innerText;
-          lastRight.innerText = sourceArray[indexOfLastRight + 1];
-      }else if(sourceArray[indexOfLastRight + 1] === undefined && lastRight.innerText !== "this is empty"){
-          lastLeft.innerText = secondaryLeft.innerText;
-          secondaryLeft.innerText = activeSlide.innerText;
-          activeSlide.innerText = secondaryRight.innerText;
-          secondaryRight.innerText = lastRight.innerText;
-          lastRight.innerText = 'this is empty';
-      }else if(secondaryRight.innerText !== 'this is empty'){
-          lastLeft.innerText = secondaryLeft.innerText;
-          secondaryLeft.innerText = activeSlide.innerText;
-          activeSlide.innerText = secondaryRight.innerText;
-          secondaryRight.innerText = 'this is empty';
-          lastRight.innerText = 'this is empty';
-      }else if (activeSlide.innerText !== "this is empty"){
-          lastLeft.innerText = "this is empty";
-          secondaryLeft.innerText = "this is empty";
-          activeSlide.innerText = sourceArray[0];
-          secondaryRight.innerText = sourceArray[1];
-          lastRight.innerText = sourceArray[2];
-      }
+  });
+  let indexOfLastRight;
+  sourceArray.forEach((el, ind) => {
+    if (lastRight.childNodes[0] && lastRight.childNodes[0].id == el.id) {
+      indexOfLastRight = ind;
+    }
+  });
+  // console.log(lastLeft.childNodes[0].id)
+  // console.log(sourceArray[0] == lastLeft.innerHTML)
+  // console.log(indexOfLastLeft);
+  if (direction === "LEFT") {
+    if (
+      sourceArray[indexOfLastLeft - 1] !== undefined &&
+      lastLeft.innerHTML !== ""
+    ) {
+      lastRight.innerHTML = secondaryRight.innerHTML;
+      secondaryRight.innerHTML = activeSlide.innerHTML;
+      activeSlide.innerHTML = secondaryLeft.innerHTML;
+      secondaryLeft.innerHTML = lastLeft.innerHTML;
+      console.log(indexOfLastLeft);
+      lastLeft.replaceChild(
+        sourceArray[indexOfLastLeft - 1].img,
+        lastLeft.childNodes[0]
+      );
+    } else if (
+      sourceArray[indexOfLastLeft - 1] === undefined &&
+      lastLeft.innerHTML !== ""
+    ) {
+      lastRight.innerHTML = secondaryRight.innerHTML;
+      secondaryRight.innerHTML = activeSlide.innerHTML;
+      activeSlide.innerHTML = secondaryLeft.innerHTML;
+      secondaryLeft.innerHTML = lastLeft.innerHTML;
+      lastLeft.innerHTML = "";
+    } else if (secondaryLeft.innerHTML !== "") {
+      lastRight.innerHTML = secondaryRight.innerHTML;
+      secondaryRight.innerHTML = activeSlide.innerHTML;
+      activeSlide.innerHTML = secondaryLeft.innerHTML;
+      secondaryLeft.innerHTML = "";
+      lastLeft.innerHTML = "";
+    } else if (activeSlide.innerHTML !== "") {
+      console.log();
+      lastRight.innerHTML = "";
+      secondaryRight.innerHTML = "";
+      activeSlide.replaceChild(
+        sourceArray[sourceArray.length - 1].img,
+        activeSlide.childNodes[0]
+      );
+      secondaryLeft.appendChild(sourceArray[sourceArray.length - 2].img);
+      lastLeft.appendChild(sourceArray[sourceArray.length - 3].img);
+
+      // activeSlide.childNodes[0] = sourceArray[sourceArray.length - 1].img;
+      // secondaryLeft.childNodes[0] = sourceArray[sourceArray.length - 2].img;
+      // lastLeft.childNodes[0] = sourceArray[sourceArray.length - 3].img;
     }
   }
-  
+  if (direction === "RIGHT") {
+    if (
+      sourceArray[indexOfLastRight + 1] !== undefined &&
+      lastRight.innerHTML !== ""
+    ) {
+      lastLeft.innerHTML = secondaryLeft.innerHTML;
+      secondaryLeft.innerHTML = activeSlide.innerHTML;
+      activeSlide.innerHTML = secondaryRight.innerHTML;
+      secondaryRight.innerHTML = lastRight.innerHTML;
+      lastRight.replaceChild(
+        sourceArray[indexOfLastRight + 1].img,
+        lastRight.childNodes[0]
+      );
+    } else if (
+      sourceArray[indexOfLastRight + 1] === undefined &&
+      lastRight.innerHTML !== ""
+    ) {
+      lastLeft.innerHTML = secondaryLeft.innerHTML;
+      secondaryLeft.innerHTML = activeSlide.innerHTML;
+      activeSlide.innerHTML = secondaryRight.innerHTML;
+      secondaryRight.innerHTML = lastRight.innerHTML;
+      lastRight.innerHTML = "";
+    } else if (secondaryRight.innerHTML !== "") {
+      lastLeft.innerHTML = secondaryLeft.innerHTML;
+      secondaryLeft.innerHTML = activeSlide.innerHTML;
+      activeSlide.innerHTML = secondaryRight.innerHTML;
+      secondaryRight.innerHTML = "";
+      lastRight.innerHTML = "";
+    } else if (activeSlide.innerHTML !== "") {
+      lastLeft.innerHTML = "";
+      secondaryLeft.innerHTML = "";
+      activeSlide.replaceChild(sourceArray[0].img, activeSlide.childNodes[0]);
+      secondaryRight.appendChild(sourceArray[1].img);
+      lastRight.appendChild(sourceArray[2].img);
+    }
+  }
+};
